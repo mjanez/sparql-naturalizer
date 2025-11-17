@@ -34,3 +34,40 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Training artifacts
+models
+training/models/
+training/data/*.json
+!training/data/example_dataset.json
+training/*.pyc
+training/.ipynb_checkpoints
+
+# TensorFlow.js models (large files)
+public/tfjs_model/
+*.bin
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.old
