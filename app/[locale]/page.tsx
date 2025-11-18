@@ -242,9 +242,52 @@ export default function Home() {
         )}
 
         {/* Premium Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:items-stretch">
           {/* Left Column - Input */}
-          <div className="space-y-6">
+          <div className="flex flex-col space-y-6 lg:h-auto">
+
+            {/* LLM Status Cards */}
+            {isModelLoading && (
+              <div>
+            <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-indigo-100 dark:border-indigo-900">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+              <div className="p-6 flex items-center gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 relative">
+                    <div className="absolute inset-0 border-4 border-indigo-100 dark:border-indigo-900 rounded-full"></div>
+                    <div className="absolute inset-0 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">{t('status.connecting')}</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('status.checking', {provider: llmProvider})}</p>
+                </div>
+              </div>
+            </div>
+              </div>
+            )}
+
+            {!isModelLoading && !modelError && (
+              <div>
+            <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-emerald-100 dark:border-emerald-900">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
+              <div className="p-6 flex items-center gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
+                    {t('status.ready', {provider: llmModel ? `${llmProvider}: ${llmModel}` : llmProvider})}
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('status.readyDescription')}</p>
+                </div>
+              </div>
+            </div>
+              </div>
+            )}
+
             {/* Input Card */}
             <div className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
@@ -256,7 +299,7 @@ export default function Home() {
                 <textarea
                   value={nlInput}
                   onChange={(e) => setNlInput(e.target.value)}
-                  placeholder={t('input.placeholder')}
+                  placeholder={t('input.exampleQueries.csv')}
                   className="w-full h-40 p-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl
                            bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-base
                            placeholder:text-slate-400 dark:placeholder:text-slate-500
@@ -372,64 +415,25 @@ export default function Home() {
                 placeholder="https://example.com/sparql"
               />
             </div>
+
           </div>
 
           {/* Right Column - Output */}
-          <div>
-          
-        {/* Elegant Status Cards */}
-        {isModelLoading && (
-          <div className="mb-8 mx-auto max-w-2xl">
-            <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-indigo-100 dark:border-indigo-900">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
-              <div className="p-6 flex items-center gap-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 relative">
-                    <div className="absolute inset-0 border-4 border-indigo-100 dark:border-indigo-900 rounded-full"></div>
-                    <div className="absolute inset-0 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">{t('status.connecting')}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('status.checking', {provider: llmProvider})}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-          {!isModelLoading && !modelError && (
-          <div className="mb-8 mx-auto max-w-2xl">
-            <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-emerald-100 dark:border-emerald-900">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
-              <div className="p-6 flex items-center gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
-                    {t('status.ready', {provider: llmModel ? `${llmProvider}: ${llmModel}` : llmProvider})}
-                  </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('status.readyDescription')}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-            <div className="group relative">
+          <div className="flex flex-col lg:min-h-[800px]">
+            <div className="group relative flex flex-col">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-              <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-200 dark:border-slate-700">
+              <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-200 dark:border-slate-700 flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-2 h-8 bg-gradient-to-b from-purple-500 to-pink-600 rounded-full"></div>
                   <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('output.title')}</h2>
                 </div>
-                <DynamicSparqlEditor 
-                  sparqlQuery={sparqlOutput}
-                  endpoint={endpoint}
-                  onQueryChange={(query) => setSparqlOutput(query)}
-                />
+                <div className="flex-1 overflow-auto">
+                  <DynamicSparqlEditor 
+                    sparqlQuery={sparqlOutput}
+                    endpoint={endpoint}
+                    onQueryChange={(query) => setSparqlOutput(query)}
+                  />
+                </div>
               </div>
             </div>
             
@@ -439,15 +443,57 @@ export default function Home() {
         {/* Premium Footer */}
         <footer className="mt-16 text-center">
           <div className="inline-flex items-center gap-6 bg-white dark:bg-slate-800 rounded-2xl shadow-xl px-8 py-5 border border-slate-200 dark:border-slate-700">
-            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 flex-wrap justify-center">
               <span className="font-semibold">{t('footer.poweredBy')}</span>
-              <span className="px-3 py-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg font-bold text-xs">
+              <a 
+                href="https://langchain.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg font-bold text-xs hover:shadow-lg hover:scale-105 transition-all"
+              >
                 {t('tech.langchain')}
-              </span>
+              </a>
               <span className="text-slate-400">+</span>
-              <span className="px-3 py-1 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg font-bold text-xs">
-                {t('tech.ollama')}
-              </span>
+              {llmProvider && !isModelLoading && (
+                <>
+                  <a 
+                    href={
+                      llmProvider === 'ollama' ? 'https://ollama.com/' :
+                      llmProvider === 'github' ? 'https://github.com/marketplace/models' :
+                      llmProvider === 'openai' ? 'https://openai.com/api/' :
+                      llmProvider === 'openrouter' ? 'https://openrouter.ai/' :
+                      '#'
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`px-3 py-1 text-white rounded-lg font-bold text-xs hover:shadow-lg hover:scale-105 transition-all ${
+                      llmProvider === 'ollama' 
+                        ? 'bg-gradient-to-r from-orange-500 to-red-600'
+                        : llmProvider === 'github'
+                        ? 'bg-gradient-to-r from-gray-700 to-gray-900'
+                        : llmProvider === 'openai'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-600'
+                        : llmProvider === 'openrouter'
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-600'
+                        : 'bg-gradient-to-r from-slate-500 to-slate-700'
+                    }`}
+                  >
+                    {llmProvider === 'ollama' ? 'Ollama' : 
+                     llmProvider === 'github' ? 'GitHub Models' :
+                     llmProvider === 'openai' ? 'OpenAI' :
+                     llmProvider === 'openrouter' ? 'OpenRouter' :
+                     llmProvider}
+                  </a>
+                  {llmModel && (
+                    <>
+                      <span className="text-slate-400">/</span>
+                      <span className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg font-bold text-xs">
+                        {llmModel}
+                      </span>
+                    </>
+                  )}
+                </>
+              )}
             </div>
             <div className="h-6 w-px bg-slate-300 dark:bg-slate-700"></div>
             <a 

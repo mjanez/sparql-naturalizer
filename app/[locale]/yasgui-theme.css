@@ -2,6 +2,11 @@
    YASGUI Custom Theme - Integrado con Tailwind slate/indigo palette
    ============================================================================ */
 
+/* Ocultar selector de endpoint (usamos el nuestro en la UI) */
+.yasgui .autocompleteWrapper {
+  display: none !important;
+}
+
 /* Contenedores principales */
 .yasgui .yasr,
 .yasgui .yasqe {
@@ -31,10 +36,25 @@
    YASQE - Editor de consulta SPARQL
    ============================================================================ */
 
+/* Contenedor principal de YASGUI */
+.yasgui-container {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.yasgui {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
 /* CodeMirror principal */
 .yasgui .yasqe .CodeMirror {
   @apply bg-slate-50 border-2 border-slate-200 rounded-xl;
   @apply font-mono text-sm leading-relaxed;
+  min-height: 250px !important;
+  max-height: 400px !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -59,15 +79,239 @@
   }
 }
 
-/* Barra de control del editor */
+/* Barra de control del editor - ocultar (el botón está dentro) */
 .yasgui .yasqe .controlbar {
-  @apply bg-slate-100 border-b-2 border-slate-200;
+  display: none !important;
+}
+
+/* Tabs: agregar el padding y estilo que tenía el controlbar */
+.yasgui .tabsList {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-wrap: nowrap !important;
+  background: rgb(241 245 249) !important;
+  padding: 0.5rem 1rem !important;
   border-radius: 0.75rem 0.75rem 0 0 !important;
+  border-bottom: 2px solid rgb(226 232 240) !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  .yasgui .yasqe .controlbar {
-    @apply bg-slate-900 border-slate-700;
+  .yasgui .tabsList {
+    background: rgb(30 41 59) !important;
+    border-bottom-color: rgb(51 65 85) !important;
+  }
+}
+
+.yasgui .tabsList .tab {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Botón de settings */
+.yasgui .controlbar .tabContextButton,
+.yasgui .tabContextButton {
+  background: rgb(241 245 249) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 150ms ease-in-out !important;
+  flex-shrink: 0 !important;
+}
+
+.yasgui .controlbar .tabContextButton:hover,
+.yasgui .tabContextButton:hover {
+  background: rgb(226 232 240) !important;
+  border-color: rgb(148 163 184) !important;
+}
+
+.yasgui .controlbar .tabContextButton svg,
+.yasgui .tabContextButton svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: rgb(71 85 105) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .controlbar .tabContextButton,
+  .yasgui .tabContextButton {
+    background: rgb(51 65 85) !important;
+    border-color: rgb(71 85 105) !important;
+  }
+  
+  .yasgui .controlbar .tabContextButton:hover,
+  .yasgui .tabContextButton:hover {
+    background: rgb(71 85 105) !important;
+    border-color: rgb(100 116 139) !important;
+  }
+  
+  .yasgui .controlbar .tabContextButton svg,
+  .yasgui .tabContextButton svg {
+    fill: rgb(226 232 240) !important;
+  }
+}
+
+/* Menú de settings desplegable */
+.yasgui .tabMenu,
+.yasgui .controlbar .tabMenu,
+.yasgui div.tabMenu {
+  background: rgb(248 250 252) !important;
+  border: 2px solid rgb(226 232 240) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+  padding: 1rem !important;
+  margin-top: 0.5rem !important;
+  min-width: 320px !important;
+  max-height: 500px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Scrollbar personalizado para el menú */
+.yasgui .tabMenu::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.yasgui .tabMenu::-webkit-scrollbar-track {
+  background: rgb(226 232 240) !important;
+  border-radius: 4px !important;
+}
+
+.yasgui .tabMenu::-webkit-scrollbar-thumb {
+  background: rgb(148 163 184) !important;
+  border-radius: 4px !important;
+}
+
+.yasgui .tabMenu::-webkit-scrollbar-thumb:hover {
+  background: rgb(100 116 139) !important;
+}
+
+/* Labels */
+.yasgui .tabMenu .label,
+.yasgui .tabMenu label.label {
+  color: rgb(51 65 85) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Wrappers */
+.yasgui .tabMenu .requestConfigWrapper {
+  margin-bottom: 1rem !important;
+  background: transparent !important;
+}
+
+/* Botones selector (GET/POST) */
+.yasgui .tabMenu .selectorButton,
+.yasgui .tabMenu button.selectorButton {
+  background: rgb(241 245 249) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(51 65 85) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 150ms ease-in-out !important;
+  margin-right: 0.5rem !important;
+}
+
+.yasgui .tabMenu .selectorButton:hover,
+.yasgui .tabMenu button.selectorButton:hover {
+  background: rgb(226 232 240) !important;
+}
+
+.yasgui .tabMenu .selectorButton.selected,
+.yasgui .tabMenu button.selectorButton.selected {
+  background: rgb(99 102 241) !important;
+  color: white !important;
+  border-color: rgb(99 102 241) !important;
+}
+
+/* Select e inputs */
+.yasgui .tabMenu select,
+.yasgui .tabMenu input[type="text"],
+.yasgui .tabMenu .selector select,
+.yasgui .tabMenu .textRow input,
+.yasgui .tabMenu .graphInput input {
+  background: rgb(248 250 252) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(15 23 42) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem !important;
+  width: 100% !important;
+}
+
+.yasgui .tabMenu select:focus,
+.yasgui .tabMenu input[type="text"]:focus {
+  border-color: rgb(99 102 241) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgb(199 210 254) !important;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .yasgui .tabMenu,
+  .yasgui .controlbar .tabMenu,
+  .yasgui div.tabMenu {
+    background: rgb(30 41 59) !important;
+    border-color: rgb(51 65 85) !important;
+  }
+  
+  /* Scrollbar en dark mode */
+  .yasgui .tabMenu::-webkit-scrollbar-track {
+    background: rgb(51 65 85) !important;
+  }
+
+  .yasgui .tabMenu::-webkit-scrollbar-thumb {
+    background: rgb(71 85 105) !important;
+  }
+
+  .yasgui .tabMenu::-webkit-scrollbar-thumb:hover {
+    background: rgb(100 116 139) !important;
+  }
+  
+  .yasgui .tabMenu .label,
+  .yasgui .tabMenu label.label {
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .tabMenu .selectorButton,
+  .yasgui .tabMenu button.selectorButton {
+    background: rgb(51 65 85) !important;
+    border-color: rgb(71 85 105) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .tabMenu .selectorButton:hover,
+  .yasgui .tabMenu button.selectorButton:hover {
+    background: rgb(71 85 105) !important;
+  }
+  
+  .yasgui .tabMenu .selectorButton.selected,
+  .yasgui .tabMenu button.selectorButton.selected {
+    background: rgb(99 102 241) !important;
+    color: white !important;
+    border-color: rgb(99 102 241) !important;
+  }
+  
+  .yasgui .tabMenu select,
+  .yasgui .tabMenu input[type="text"],
+  .yasgui .tabMenu .selector select,
+  .yasgui .tabMenu .textRow input,
+  .yasgui .tabMenu .graphInput input {
+    background: rgb(15 23 42) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .tabMenu select:focus,
+  .yasgui .tabMenu input[type="text"]:focus {
+    border-color: rgb(99 102 241) !important;
+    box-shadow: 0 0 0 3px rgb(55 48 163) !important;
   }
 }
 
@@ -92,7 +336,7 @@
 
 .yasgui .tabsList .tab.active a {
     border-bottom-color: #337ab7;
-    color: #14b8a6  !important;
+    color: #337ab7  !important;
     font-weight: 600 !important;
 }
 
@@ -192,9 +436,14 @@
   }
 }
 
-/* Header con controles */
+/* Header con controles - estilizado y con espacio para botones */
 .yasgui .yasr .yasr_header {
   @apply bg-slate-100 border-b-2 border-slate-200;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.75rem 1rem !important;
+  gap: 1rem !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -213,6 +462,54 @@
   @apply bg-indigo-600 text-white;
 }
 
+/* Botones del header (download, help, etc.) */
+.yasgui .yasr .yasr_header button,
+.yasgui .yasr .yasr_header .yasr_btn {
+  background: white !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(51 65 85) !important;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 150ms ease-in-out !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.375rem !important;
+}
+
+.yasgui .yasr .yasr_header button:hover,
+.yasgui .yasr .yasr_header .yasr_btn:hover {
+  background: rgb(241 245 249) !important;
+  border-color: rgb(148 163 184) !important;
+  color: rgb(30 41 59) !important;
+}
+
+.yasgui .yasr .yasr_header button svg,
+.yasgui .yasr .yasr_header .yasr_btn svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Grupo de botones del header */
+.yasgui .yasr .yasr_header .yasr_btnGroup {
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  margin-left: auto !important;
+}
+
+.yasr .yasr_plugin_control {
+    display: flex;
+    margin-left: unset !important;
+    align-items: center;
+}
+
+.yasr .yasr_btnGroup .yasr_btn {
+    padding-left: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
   .yasgui .yasr .yasr_response_chip,
   .yasgui .yasr .yasr_btnGroup {
@@ -225,6 +522,21 @@
   
   .yasgui .yasr {
     @apply text-slate-200;
+  }
+  
+  /* Botones del header en dark mode */
+  .yasgui .yasr .yasr_header button,
+  .yasgui .yasr .yasr_header .yasr_btn {
+    background: rgb(30 41 59) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr .yasr_header button:hover,
+  .yasgui .yasr .yasr_header .yasr_btn:hover {
+    background: rgb(51 65 85) !important;
+    border-color: rgb(71 85 105) !important;
+    color: rgb(248 250 252) !important;
   }
 }
 
@@ -467,5 +779,358 @@
     background: rgb(127 29 29) !important;
     color: rgb(254 202 202) !important;
     border: 1px solid rgb(153 27 27) !important;
+  }
+}
+
+/* ============================================================================
+   DataTables - Forzar visualización correcta de todos los resultados
+   ============================================================================ */
+
+/* Asegurar que las filas no se oculten por CSS */
+.yasgui .yasr .dataTable tbody tr {
+  display: table-row !important;
+}
+
+/* Forzar que el contenedor de tabla no tenga altura máxima restrictiva pero sí contenido */
+.yasgui .yasr .dataTables_wrapper {
+  overflow-x: auto !important;
+  max-width: 100% !important;
+}
+
+.yasgui .yasr .dataTables_scroll {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+
+.yasgui .yasr .dataTables_scrollBody {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-width: 100% !important;
+}
+
+/* Asegurar que la tabla respete el ancho del contenedor */
+.yasgui .yasr table.dataTable {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: auto !important;
+}
+
+/* Ajustar celdas para que no desborden */
+.yasgui .yasr table.dataTable td,
+.yasgui .yasr table.dataTable th {
+  max-width: 300px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Asegurar que la paginación sea visible */
+.yasgui .yasr .dataTables_paginate,
+.yasgui .yasr .dataTables_info,
+.yasgui .yasr .dataTables_length {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Selector de cantidad de resultados más visible */
+.yasgui .yasr .dataTables_length select {
+  min-width: 60px !important;
+  font-weight: 600 !important;
+}
+
+/* ============================================================================
+   Table Controls - Switches, Filter y Page Size
+   ============================================================================ */
+
+/* Contenedor de controles de tabla */
+.yasgui .yasr .tableControls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-wrap: nowrap !important;
+  padding: 0.625rem 0.75rem !important;
+  background: rgb(248 250 252) !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid rgb(226 232 240) !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+}
+
+/* Contenedor de los switches */
+.yasgui .yasr .tableControls > div:first-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Labels de switches */
+.yasgui .yasr .tableControls .switch {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.yasgui .yasr .tableControls .switch .label {
+  color: rgb(51 65 85) !important;
+  font-weight: 500 !important;
+  font-size: 0.75rem !important;
+}
+
+/* Checkboxes estilizados como switches - ultra compactos */
+.yasgui .yasr .tableControls input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 36px !important;
+  height: 20px !important;
+  background: rgb(203 213 225) !important;
+  border-radius: 10px !important;
+  position: relative !important;
+  cursor: pointer !important;
+  transition: all 200ms ease-in-out !important;
+  border: none !important;
+  outline: none !important;
+  flex-shrink: 0 !important;
+}
+
+.yasgui .yasr .tableControls input[type="checkbox"]::before {
+  content: '' !important;
+  position: absolute !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  background: white !important;
+  top: 2px !important;
+  left: 2px !important;
+  transition: all 200ms ease-in-out !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.yasgui .yasr .tableControls input[type="checkbox"]:checked {
+  background: rgb(99 102 241) !important;
+}
+
+.yasgui .yasr .tableControls input[type="checkbox"]:checked::before {
+  left: 18px !important;
+}
+
+.yasgui .yasr .tableControls input[type="checkbox"]:hover {
+  background: rgb(148 163 184) !important;
+}
+
+.yasgui .yasr .tableControls input[type="checkbox"]:checked:hover {
+  background: rgb(79 70 229) !important;
+}
+
+/* Input de filtro - muy reducido para evitar desbordamiento */
+.yasgui .yasr .tableControls .tableFilter {
+  flex: 0 1 auto !important;
+  width: 120px !important;
+  min-width: 100px !important;
+  max-width: 150px !important;
+  padding: 0.375rem 0.5rem !important;
+  border: 1px solid rgb(203 213 225) !important;
+  border-radius: 0.375rem !important;
+  background: white !important;
+  color: rgb(15 23 42) !important;
+  font-size: 0.75rem !important;
+  transition: all 150ms ease-in-out !important;
+}
+
+.yasgui .yasr .tableControls .tableFilter:focus {
+  outline: none !important;
+  border-color: rgb(99 102 241) !important;
+  box-shadow: 0 0 0 3px rgb(199 210 254) !important;
+}
+
+.yasgui .yasr .tableControls .tableFilter::placeholder {
+  color: rgb(148 163 184) !important;
+}
+
+/* Page Size Wrapper */
+.yasgui .yasr .tableControls .pageSizeWrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+.yasgui .yasr .tableControls .pageSizerLabel {
+  color: rgb(51 65 85) !important;
+  font-weight: 500 !important;
+  font-size: 0.75rem !important;
+  white-space: nowrap !important;
+}
+
+.yasgui .yasr .tableControls .tableSizer {
+  padding: 0.375rem 0.5rem !important;
+  padding-right: 1.5rem !important;
+  border: 1px solid rgb(203 213 225) !important;
+  border-radius: 0.375rem !important;
+  background: white !important;
+  color: rgb(15 23 42) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 150ms ease-in-out !important;
+  min-width: 60px !important;
+}
+
+.yasgui .yasr .tableControls .tableSizer:hover {
+  border-color: rgb(148 163 184) !important;
+  background: rgb(248 250 252) !important;
+}
+
+.yasgui .yasr .tableControls .tableSizer:focus {
+  outline: none !important;
+  border-color: rgb(99 102 241) !important;
+  box-shadow: 0 0 0 3px rgb(199 210 254) !important;
+}
+
+/* Dark mode para table controls */
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .tableControls {
+    background: rgb(30 41 59) !important;
+    border-color: rgb(51 65 85) !important;
+  }
+  
+  .yasgui .yasr .tableControls .switch .label,
+  .yasgui .yasr .tableControls .pageSizerLabel {
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr .tableControls input[type="checkbox"] {
+    background: rgb(51 65 85) !important;
+  }
+  
+  .yasgui .yasr .tableControls input[type="checkbox"]::before {
+    background: rgb(203 213 225) !important;
+  }
+  
+  .yasgui .yasr .tableControls input[type="checkbox"]:checked {
+    background: rgb(99 102 241) !important;
+  }
+  
+  .yasgui .yasr .tableControls input[type="checkbox"]:checked::before {
+    background: white !important;
+  }
+  
+  .yasgui .yasr .tableControls input[type="checkbox"]:hover {
+    background: rgb(71 85 105) !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableFilter {
+    background: rgb(15 23 42) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+    border-width: 1px !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableFilter:focus {
+    border-color: rgb(99 102 241) !important;
+    box-shadow: 0 0 0 2px rgb(55 48 163) !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableFilter::placeholder {
+    color: rgb(71 85 105) !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableSizer {
+    background: rgb(15 23 42) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+    border-width: 1px !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableSizer:hover {
+    border-color: rgb(71 85 105) !important;
+    background: rgb(30 41 59) !important;
+  }
+  
+  .yasgui .yasr .tableControls .tableSizer:focus {
+    border-color: rgb(99 102 241) !important;
+    box-shadow: 0 0 0 2px rgb(55 48 163) !important;
+  }
+}
+
+/* Botones de paginación - hacerlos visibles */
+.yasgui .yasr .dataTables_paginate .paginate_button,
+.yasgui .yasr .dataTables_paginate .paginate_button.current,
+.yasgui .yasr .dataTables_paginate .paginate_button.disabled {
+  background: rgb(241 245 249) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(51 65 85) !important;
+  border-radius: 0.375rem !important;
+  padding: 0.375rem 0.75rem !important;
+  margin: 0 0.125rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 150ms ease-in-out !important;
+}
+
+.yasgui .yasr .dataTables_paginate .paginate_button:hover {
+  background: rgb(226 232 240) !important;
+  color: rgb(30 41 59) !important;
+  border-color: rgb(148 163 184) !important;
+}
+
+.yasgui .yasr .dataTables_paginate .paginate_button.current,
+.yasgui .yasr .dataTables_paginate .paginate_button.current:hover {
+  background: rgb(99 102 241) !important;
+  color: rgb(255 255 255) !important;
+  border-color: rgb(99 102 241) !important;
+  font-weight: 700 !important;
+}
+
+.yasgui .yasr .dataTables_paginate .paginate_button.disabled,
+.yasgui .yasr .dataTables_paginate .paginate_button.disabled:hover {
+  background: rgb(248 250 252) !important;
+  color: rgb(148 163 184) !important;
+  border-color: rgb(226 232 240) !important;
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+/* Contenedor de paginación */
+.yasgui .yasr .dataTables_paginate {
+  padding: 0.5rem 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.25rem !important;
+}
+
+/* Dark mode para paginación */
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .dataTables_paginate .paginate_button,
+  .yasgui .yasr .dataTables_paginate .paginate_button.disabled {
+    background: rgb(30 41 59) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr .dataTables_paginate .paginate_button:hover {
+    background: rgb(51 65 85) !important;
+    color: rgb(248 250 252) !important;
+    border-color: rgb(71 85 105) !important;
+  }
+  
+  .yasgui .yasr .dataTables_paginate .paginate_button.current,
+  .yasgui .yasr .dataTables_paginate .paginate_button.current:hover {
+    background: rgb(99 102 241) !important;
+    color: rgb(255 255 255) !important;
+    border-color: rgb(99 102 241) !important;
+  }
+  
+  .yasgui .yasr .dataTables_paginate .paginate_button.disabled,
+  .yasgui .yasr .dataTables_paginate .paginate_button.disabled:hover {
+    background: rgb(15 23 42) !important;
+    color: rgb(71 85 105) !important;
+    border-color: rgb(30 41 59) !important;
   }
 }

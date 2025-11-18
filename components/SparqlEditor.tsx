@@ -31,7 +31,6 @@ const SparqlEditor: React.FC<SparqlEditorProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Solo cargar YASGUI en el cliente
     if (typeof window === 'undefined') return;
 
     let isMounted = true;
@@ -49,31 +48,105 @@ const SparqlEditor: React.FC<SparqlEditorProps> = ({
           link.href = 'https://unpkg.com/@triply/yasgui@4.2.28/build/yasgui.min.css';
           document.head.appendChild(link);
         }
+        
+        // Configurar DataTables globalmente antes de inicializar YASGUI
+        if (typeof (window as any).jQuery !== 'undefined' && (window as any).jQuery.fn.dataTable) {
+          (window as any).jQuery.fn.dataTable.defaults = {
+            pageLength: 10,
+            lengthMenu: [[10, 25, 50], [10, 25, 50]],
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true
+          };
+        }
 
-        // Importación dinámica de YASGUI
         const Yasgui = (await import('@triply/yasgui')).default;
 
-        // Verificar que el componente sigue montado
         if (!isMounted || !yasguiContainerRef.current) return;
 
-        // Crear instancia de YASGUI solo si no existe
-        if (!yasguiInstanceRef.current) {
-          yasguiInstanceRef.current = new Yasgui(yasguiContainerRef.current, {
-            requestConfig: { 
-              endpoint: endpoint 
-            },
-            copyEndpointOnNewTab: false,
-            persistenceId: null, // Deshabilitar persistencia para evitar conflictos
+        // Limpiar instancia anterior si existe
+        if (yasguiInstanceRef.current) {
+          yasguiContainerRef.current.innerHTML = '';
+        }
+
+        // Crear nueva instancia de YASGUI con configuración completa
+        yasguiInstanceRef.current = new Yasgui(yasguiContainerRef.current, {
+          requestConfig: { 
+            endpoint: endpoint 
+          },
+          copyEndpointOnNewTab: false,
+          persistenceId: null, // Deshabilitar persistencia para evitar conflictos
+          yasqe: {
+            // Configuración del editor
+          },
+          yasr: {
+            // Configuración de resultados
+            defaultPlugin: 'table',
+            pluginsConfig: {
+              table: {
+                // Configuración específica de DataTables
+                tableConfig: {
+                  pageLength: 10, // 10 resultados por defecto
+                  lengthMenu: [[10, 25, 50], [10, 25, 50]], // Opciones de página
+                  paging: true,
+                  searching: true,
+                  ordering: true,
+                  info: true
+                }
+              }
+            }
+          }
+        });
+
+        const tab = yasguiInstanceRef.current.getTab();
+
+        if (tab && tab.yasqe) {
+          tab.yasqe.setValue(sparqlQuery);
+          
+          if (onQueryChange) {
+            tab.yasqe.on('change', () => {
+              const newQuery = tab.yasqe.getValue();
+              onQueryChange(newQuery);
+            });
+          }
+        }
+        
+        if (tab && tab.yasr) {
+          const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+              if (mutation.addedNodes.length > 0) {
+                const table = yasguiContainerRef.current?.querySelector('.dataTable');
+                if (table && (window as any).jQuery) {
+                  const $ = (window as any).jQuery;
+                  
+                  if ($.fn.DataTable.isDataTable(table)) {
+                    const dt = $(table).DataTable();
+                    
+                    dt.destroy();
+                    $(table).DataTable({
+                      pageLength: 10,
+                      lengthMenu: [[10, 25, 50], [10, 25, 50]],
+                      paging: true,
+                      searching: true,
+                      ordering: true,
+                      info: true,
+                      retrieve: true
+                    });
+                    
+                    console.log('✅ DataTables reconfigurado con pageLength: 10');
+                  }
+                }
+              }
+            }
           });
 
-          const tab = yasguiInstanceRef.current.getTab();
-          if (tab && tab.yasqe) {
-            tab.yasqe.setValue(sparqlQuery);
-            
-            if (onQueryChange) {
-              tab.yasqe.on('change', () => {
-                const newQuery = tab.yasqe.getValue();
-                onQueryChange(newQuery);
+          if (yasguiContainerRef.current) {
+            const resultsContainer = yasguiContainerRef.current.querySelector('.yasr');
+            if (resultsContainer) {
+              observer.observe(resultsContainer, {
+                childList: true,
+                subtree: true
               });
             }
           }
@@ -99,15 +172,13 @@ const SparqlEditor: React.FC<SparqlEditorProps> = ({
       }
       yasguiInstanceRef.current = null;
     };
-  }, []); // Solo ejecutar una vez al montar
+  }, [endpoint]);
 
-  // Actualizar la consulta cuando la prop cambie
   useEffect(() => {
     if (yasguiInstanceRef.current && sparqlQuery) {
       const tab = yasguiInstanceRef.current.getTab();
       if (tab && tab.yasqe) {
         const currentQuery = tab.yasqe.getValue();
-        // Solo actualizar si la consulta es diferente
         if (currentQuery !== sparqlQuery) {
           tab.yasqe.setValue(sparqlQuery);
         }
@@ -139,11 +210,10 @@ const SparqlEditor: React.FC<SparqlEditorProps> = ({
       <div 
         ref={yasguiContainerRef} 
         className="yasgui-container"
-        style={{ minHeight: '400px' }}
+        style={{ minHeight: '600px', height: '100%' }}
       />
     </div>
   );
 };
 
-// Usar React.memo para optimizar re-renders
 export default React.memo(SparqlEditor);
