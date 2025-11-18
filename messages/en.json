@@ -1,0 +1,82 @@
+{
+  "app": {
+    "title": "AI SPARQL Generator",
+    "subtitle": "Convert natural language to SPARQL queries for datos.gob.es"
+  },
+  "status": {
+    "connecting": "Connecting to LLM Provider",
+    "checking": "Checking {provider} availability...",
+    "ready": "LLM Ready ({provider})",
+    "readyDescription": "Ready to transform your queries into SPARQL",
+    "modelLoadingFailed": "Model Loading Failed",
+    "generatingTitle": "Generating SPARQL Query",
+    "generatingDescription": "Your query is being processed...",
+    "step": {
+      "initializing": "Initializing...",
+      "analyzing": "Analyzing query...",
+      "searching": "Searching knowledge base...",
+      "generating": "Generating SPARQL..."
+    }
+  },
+  "input": {
+    "title": "Your Query",
+    "placeholder": "Type your question in plain language...",
+    "examples": "Quick Examples",
+    "exampleQueries": {
+      "csv": "Give me all datasets in CSV format",
+      "health": "List health-related datasets",
+      "ministry": "Search datasets from the Ministry of Health",
+      "license": "Show distributions with CC license"
+    }
+  },
+  "output": {
+    "title": "SPARQL Output",
+    "placeholder": "The generated SPARQL query will appear here..."
+  },
+  "actions": {
+    "generate": "Generate SPARQL",
+    "generating": "Generating...",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "execute": "Execute",
+    "executing": "Executing...",
+    "clear": "Clear"
+  },
+  "endpoint": {
+    "label": "SPARQL Endpoint",
+    "default": "datos.gob.es",
+    "europa": "data.europa.eu"
+  },
+  "results": {
+    "title": "Query Results",
+    "count": "{count} results found",
+    "noResults": "No results found",
+    "error": "Error executing query",
+    "view": "View results"
+  },
+  "errors": {
+    "queryRequired": "Please enter a query",
+    "generationFailed": "Failed to generate SPARQL",
+    "executionFailed": "Failed to execute query",
+    "connectionFailed": "Cannot connect to LLM provider. Check configuration."
+  },
+  "footer": {
+    "poweredBy": "Powered by",
+    "documentation": "Documentation",
+    "github": "GitHub"
+  },
+  "editor": {
+    "loading": "Loading SPARQL Editor...",
+    "errorTitle": "Error loading SPARQL Editor",
+    "loadFailed": "Failed to load YASGUI"
+  },
+  "loading": {
+    "generic": "Loading...",
+    "provider": "Loading provider..."
+  },
+  "tech": {
+    "langchain": "LangChain.js",
+    "ollama": "Ollama RAG",
+    "endpointLabel": "SPARQL Endpoint"
+  }
+}

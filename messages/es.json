@@ -1,0 +1,82 @@
+{
+  "app": {
+    "title": "Generador de SPARQL con IA",
+    "subtitle": "Convierte lenguaje natural en consultas SPARQL para datos.gob.es"
+  },
+  "status": {
+    "connecting": "Conectando al proveedor de LLM",
+    "checking": "Verificando disponibilidad de {provider}...",
+    "ready": "LLM Listo ({provider})",
+    "readyDescription": "Listo para transformar tus consultas en SPARQL",
+    "modelLoadingFailed": "Error al Cargar el Modelo",
+    "generatingTitle": "Generando Consulta SPARQL",
+    "generatingDescription": "Tu consulta se está procesando...",
+    "step": {
+      "initializing": "Inicializando...",
+      "analyzing": "Analizando consulta...",
+      "searching": "Buscando en knowledge base...",
+      "generating": "Generando SPARQL..."
+    }
+  },
+  "input": {
+    "title": "Tu Consulta",
+    "placeholder": "Escribe tu pregunta en lenguaje natural...",
+    "examples": "Ejemplos rápidos",
+    "exampleQueries": {
+      "csv": "Dame todos los datasets en formato CSV",
+      "health": "Lista datasets sobre salud",
+      "ministry": "Busca datasets del Ministerio de Sanidad",
+      "license": "Muestra distribuciones con licencia CC"
+    }
+  },
+  "output": {
+    "title": "Salida SPARQL",
+    "placeholder": "La consulta SPARQL generada aparecerá aquí..."
+  },
+  "actions": {
+    "generate": "Generar SPARQL",
+    "generating": "Generando...",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "execute": "Ejecutar",
+    "executing": "Ejecutando...",
+    "clear": "Limpiar"
+  },
+  "endpoint": {
+    "label": "Endpoint SPARQL",
+    "default": "datos.gob.es",
+    "europa": "data.europa.eu"
+  },
+  "results": {
+    "title": "Resultados de la Consulta",
+    "count": "{count} resultados encontrados",
+    "noResults": "No se encontraron resultados",
+    "error": "Error al ejecutar la consulta",
+    "view": "Ver resultados"
+  },
+  "errors": {
+    "queryRequired": "Por favor, introduce una consulta",
+    "generationFailed": "Error al generar SPARQL",
+    "executionFailed": "Error al ejecutar la consulta",
+    "connectionFailed": "No se puede conectar al proveedor de LLM. Verifica la configuración."
+  },
+  "footer": {
+    "poweredBy": "Impulsado por",
+    "documentation": "Documentación",
+    "github": "GitHub"
+  },
+  "editor": {
+    "loading": "Cargando Editor SPARQL...",
+    "errorTitle": "Error al cargar el Editor SPARQL",
+    "loadFailed": "No se pudo cargar YASGUI"
+  },
+  "loading": {
+    "generic": "Cargando...",
+    "provider": "Cargando proveedor..."
+  },
+  "tech": {
+    "langchain": "LangChain.js",
+    "ollama": "Ollama RAG",
+    "endpointLabel": "Endpoint SPARQL"
+  }
+}

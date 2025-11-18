@@ -1,0 +1,471 @@
+/* ============================================================================
+   YASGUI Custom Theme - Integrado con Tailwind slate/indigo palette
+   ============================================================================ */
+
+/* Contenedores principales */
+.yasgui .yasr,
+.yasgui .yasqe {
+  background: transparent !important;
+}
+
+/* Fuente global para textos no-código (misma que la app) */
+.yasgui,
+.yasgui .yasr,
+.yasgui .yasr_header,
+.yasgui .yasr_results,
+.yasgui .dataTables_wrapper,
+.yasgui .dataTables_info,
+.yasgui .dataTables_paginate,
+.yasgui .dataTables_filter,
+.yasgui .dataTables_length,
+.yasgui .autocompleteWrapper,
+.yasgui label,
+.yasgui button:not(.cm-button),
+.yasgui input:not([class*="CodeMirror"]),
+.yasgui select,
+.yasgui .errorMessage {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+/* ============================================================================
+   YASQE - Editor de consulta SPARQL
+   ============================================================================ */
+
+/* CodeMirror principal */
+.yasgui .yasqe .CodeMirror {
+  @apply bg-slate-50 border-2 border-slate-200 rounded-xl;
+  @apply font-mono text-sm leading-relaxed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasqe .CodeMirror {
+    @apply bg-slate-950 border-slate-700 text-slate-200;
+  }
+  
+  .yasgui .yasqe .CodeMirror-gutters {
+    @apply bg-slate-900 border-r border-slate-700;
+  }
+  
+  .yasgui .yasqe .CodeMirror-linenumber {
+    @apply text-slate-500;
+  }
+  
+  .yasgui .yasqe .CodeMirror-cursor {
+    border-left-color: theme('colors.indigo.400') !important;
+  }
+  
+  .yasgui .yasqe .CodeMirror-selected {
+    @apply bg-slate-700;
+  }
+}
+
+/* Barra de control del editor */
+.yasgui .yasqe .controlbar {
+  @apply bg-slate-100 border-b-2 border-slate-200;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasqe .controlbar {
+    @apply bg-slate-900 border-slate-700;
+  }
+}
+
+/* Autocomplete dropdown */
+.yasgui .yasqe .autocompleteWrapper,
+.yasgui .yasr .autocompleteWrapper {
+  background: rgb(248 250 252) !important;
+  border: 2px solid rgb(226 232 240) !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+
+.yasgui .yasqe .autocompleteWrapper ul,
+.yasgui .yasr .autocompleteWrapper ul,
+.yasgui .yasqe .autocompleteWrapper ul.autocompleteList,
+.yasgui .yasr .autocompleteWrapper ul.autocompleteList {
+  background: rgb(248 250 252) !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0.25rem !important;
+}
+
+.yasgui .tabsList .tab.active a {
+    border-bottom-color: #337ab7;
+    color: #14b8a6  !important;
+    font-weight: 600 !important;
+}
+
+.yasgui .tabsList .tab a .closeTab {
+    color: rgb(127 29 29) !important;
+    margin-left: 7px;
+    font-size: 15px;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    font-weight: 700;
+    padding: 2px;
+}
+
+.yasgui .yasqe .autocompleteWrapper ul li,
+.yasgui .yasr .autocompleteWrapper ul li {
+  background: transparent !important;
+  color: rgb(15 23 42) !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0.375rem !important;
+  cursor: pointer !important;
+  transition: background-color 150ms ease-in-out !important;
+}
+
+.yasgui .yasqe .autocompleteWrapper ul li:hover,
+.yasgui .yasr .autocompleteWrapper ul li:hover,
+.yasgui .yasqe .autocompleteWrapper ul li.CodeMirror-hint-active,
+.yasgui .yasr .autocompleteWrapper ul li.CodeMirror-hint-active {
+  background: rgb(226 232 240) !important;
+  color: rgb(15 23 42) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasqe .autocompleteWrapper,
+  .yasgui .yasr .autocompleteWrapper {
+    background: rgb(30 41 59) !important;
+    border: 2px solid rgb(51 65 85) !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5) !important;
+  }
+  
+  .yasgui .yasqe .autocompleteWrapper ul,
+  .yasgui .yasr .autocompleteWrapper ul,
+  .yasgui .yasqe .autocompleteWrapper ul.autocompleteList,
+  .yasgui .yasr .autocompleteWrapper ul.autocompleteList {
+    background: rgb(30 41 59) !important;
+  }
+  
+  .yasgui .yasqe .autocompleteWrapper ul li,
+  .yasgui .yasr .autocompleteWrapper ul li {
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasqe .autocompleteWrapper ul li:hover,
+  .yasgui .yasr .autocompleteWrapper ul li:hover,
+  .yasgui .yasqe .autocompleteWrapper ul li.CodeMirror-hint-active,
+  .yasgui .yasr .autocompleteWrapper ul li.CodeMirror-hint-active {
+    background: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+}
+
+/* ============================================================================
+   Syntax Highlighting - Colores personalizados
+   ============================================================================ */
+
+.yasgui .yasqe .cm-keyword {
+  @apply text-purple-500 font-semibold;
+}
+
+.yasgui .yasqe .cm-atom {
+  @apply text-pink-500;
+}
+
+.yasgui .yasqe .cm-variable {
+  @apply text-sky-500;
+}
+
+.yasgui .yasqe .cm-string {
+  @apply text-green-500;
+}
+
+.yasgui .yasqe .cm-comment {
+  @apply text-slate-400 italic;
+}
+
+/* ============================================================================
+   YASR - Visualizador de resultados
+   ============================================================================ */
+
+/* Contenedor principal de resultados */
+.yasgui .yasr .yasr_results {
+  @apply bg-slate-50;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .yasr_results {
+    @apply bg-slate-950;
+  }
+}
+
+/* Header con controles */
+.yasgui .yasr .yasr_header {
+  @apply bg-slate-100 border-b-2 border-slate-200;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .yasr_header {
+    @apply bg-slate-900 border-slate-700;
+  }
+}
+
+/* Chips de selección de formato (Table/JSON/CSV) */
+.yasgui .yasr .yasr_response_chip,
+.yasgui .yasr .yasr_btnGroup {
+  @apply bg-slate-100 text-slate-700;
+}
+
+.yasgui .yasr .yasr_response_chip.active {
+  @apply bg-indigo-600 text-white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .yasr_response_chip,
+  .yasgui .yasr .yasr_btnGroup {
+    @apply bg-slate-900 text-slate-200;
+  }
+  
+  .yasgui .yasr .yasr_response_chip.active {
+    @apply bg-indigo-600 text-white;
+  }
+  
+  .yasgui .yasr {
+    @apply text-slate-200;
+  }
+}
+
+/* ============================================================================
+   Tabla de resultados (DataTables)
+   ============================================================================ */
+
+.yasgui .yasr table,
+.yasgui .yasr .dataTable,
+.yasgui .yasr table.dataTable {
+  background: rgb(248 250 252) !important;
+  color: rgb(15 23 42) !important;
+}
+
+.yasgui .yasr table thead,
+.yasgui .yasr table tbody,
+.yasgui .yasr .dataTable thead,
+.yasgui .yasr .dataTable tbody {
+  background: rgb(248 250 252) !important;
+}
+
+.yasgui .yasr table th,
+.yasgui .yasr .dataTable th {
+  background: rgb(241 245 249) !important;
+  border-bottom: 1px solid rgb(226 232 240) !important;
+  color: rgb(51 65 85) !important;
+}
+
+.yasgui .yasr table td,
+.yasgui .yasr .dataTable td,
+.yasgui .yasr table td div,
+.yasgui .yasr .dataTable td div {
+  background: rgb(248 250 252) !important;
+  border-bottom: 1px solid rgb(226 232 240) !important;
+  color: rgb(51 65 85) !important;
+}
+
+.yasgui .yasr table tr,
+.yasgui .yasr .dataTable tr,
+.yasgui .yasr table tr.odd,
+.yasgui .yasr table tr.even,
+.yasgui .yasr .dataTable tr.odd,
+.yasgui .yasr .dataTable tr.even {
+  background: rgb(248 250 252) !important;
+}
+
+.yasgui .yasr table tr:hover,
+.yasgui .yasr .dataTable tr:hover,
+.yasgui .yasr table tr:hover td,
+.yasgui .yasr .dataTable tr:hover td {
+  background: rgb(241 245 249) !important;
+}
+
+/* Controles de DataTables (search, pagination) */
+.yasgui .yasr .dataTables_wrapper,
+.yasgui .yasr .dataTables_filter,
+.yasgui .yasr .dataTables_length,
+.yasgui .yasr .dataTables_info,
+.yasgui .yasr .dataTables_paginate {
+  background: rgb(248 250 252) !important;
+  color: rgb(51 65 85) !important;
+}
+
+.yasgui .yasr .dataTables_filter input,
+.yasgui .yasr .dataTables_length select {
+  background: rgb(241 245 249) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(15 23 42) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+/* Inputs específicos de YASR: filter, sizer, autocomplete */
+.yasgui .yasr input.tableFilter,
+.yasgui .yasr select.tableSizer,
+.yasgui .yasr input.autocomplete,
+.yasgui .yasqe input.autocomplete,
+.yasgui .autocompleteWrapper input.autocomplete {
+  background: rgb(241 245 249) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(15 23 42) !important;
+  border-radius: 0.375rem !important;
+  padding: 0.375rem 0.75rem !important;
+}
+
+.yasgui .yasr input.tableFilter::placeholder,
+.yasgui .autocompleteWrapper input.autocomplete::placeholder {
+  color: rgb(100 116 139) !important;
+}
+
+/* Radio buttons y checkboxes */
+.yasgui .yasr input[type="radio"],
+.yasgui .yasr input[type="checkbox"] {
+  accent-color: rgb(79 70 229) !important;
+}
+
+/* Input del endpoint */
+.yasgui .yasqe input[type="text"],
+.yasgui .yasr input[type="text"] {
+  background: rgb(248 250 252) !important;
+  border: 1px solid rgb(203 213 225) !important;
+  color: rgb(15 23 42) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr table,
+  .yasgui .yasr .dataTable,
+  .yasgui .yasr table.dataTable {
+    background: rgb(15 23 42) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr table thead,
+  .yasgui .yasr table tbody,
+  .yasgui .yasr .dataTable thead,
+  .yasgui .yasr .dataTable tbody {
+    background: rgb(15 23 42) !important;
+  }
+  
+  .yasgui .yasr table th,
+  .yasgui .yasr .dataTable th {
+    background: rgb(30 41 59) !important;
+    border-bottom: 1px solid rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr table td,
+  .yasgui .yasr .dataTable td,
+  .yasgui .yasr table td div,
+  .yasgui .yasr .dataTable td div {
+    background: rgb(15 23 42) !important;
+    border-bottom: 1px solid rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr table tr,
+  .yasgui .yasr .dataTable tr,
+  .yasgui .yasr table tr.odd,
+  .yasgui .yasr table tr.even,
+  .yasgui .yasr .dataTable tr.odd,
+  .yasgui .yasr .dataTable tr.even {
+    background: rgb(15 23 42) !important;
+  }
+  
+  .yasgui .yasr table tr:hover,
+  .yasgui .yasr .dataTable tr:hover,
+  .yasgui .yasr table tr:hover td,
+  .yasgui .yasr .dataTable tr:hover td {
+    background: rgb(30 41 59) !important;
+  }
+  
+  /* Controles de DataTables en dark mode */
+  .yasgui .yasr .dataTables_wrapper,
+  .yasgui .yasr .dataTables_filter,
+  .yasgui .yasr .dataTables_length,
+  .yasgui .yasr .dataTables_info,
+  .yasgui .yasr .dataTables_paginate {
+    background: rgb(15 23 42) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr .dataTables_filter input,
+  .yasgui .yasr .dataTables_length select {
+    background: rgb(30 41 59) !important;
+    border: 1px solid rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  /* Inputs específicos de YASR en dark mode */
+  .yasgui .yasr input.tableFilter,
+  .yasgui .yasr select.tableSizer,
+  .yasgui .yasr input.autocomplete,
+  .yasgui .yasqe input.autocomplete,
+  .yasgui .autocompleteWrapper input.autocomplete {
+    background: rgb(30 41 59) !important;
+    border: 1px solid rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+  
+  .yasgui .yasr input.tableFilter::placeholder,
+  .yasgui .autocompleteWrapper input.autocomplete::placeholder {
+    color: rgb(148 163 184) !important;
+  }
+  
+  /* Radio buttons y checkboxes en dark mode */
+  .yasgui .yasr input[type="radio"],
+  .yasgui .yasr input[type="checkbox"] {
+    accent-color: rgb(99 102 241) !important;
+  }
+  
+  /* Input del endpoint en dark mode */
+  .yasgui .yasqe input[type="text"],
+  .yasgui .yasr input[type="text"] {
+    background: rgb(30 41 59) !important;
+    border: 1px solid rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+  }
+}
+
+/* ============================================================================
+   CodeMirror de respuesta (JSON/XML/RDF)
+   ============================================================================ */
+
+.yasgui .yasr .CodeMirror {
+  @apply bg-slate-50 border-2 border-slate-200 rounded-lg text-slate-950;
+}
+
+.yasgui .yasr .CodeMirror-gutters {
+  @apply bg-slate-100 border-r border-slate-200;
+}
+
+/* ============================================================================
+   Error messages
+   ============================================================================ */
+
+.yasgui .yasr .errorMessage,
+.yasgui .yasr pre.errorMessage {
+  background: rgb(254 242 242) !important;
+  color: rgb(153 27 27) !important;
+  border: 1px solid rgb(254 202 202) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .yasgui .yasr .CodeMirror {
+    @apply bg-slate-950 border-slate-700 text-slate-200;
+  }
+  
+  .yasgui .yasr .CodeMirror-gutters {
+    @apply bg-slate-900 border-slate-700;
+  }
+  
+  .yasgui .yasr .errorMessage,
+  .yasgui .yasr pre.errorMessage {
+    background: rgb(127 29 29) !important;
+    color: rgb(254 202 202) !important;
+    border: 1px solid rgb(153 27 27) !important;
+  }
+}
