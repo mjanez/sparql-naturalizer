@@ -216,11 +216,14 @@ CONSULTA SPARQL:`;
             const llmResponse = await invokeLLM(prompt);
             const accumulatedText = llmResponse.content;
 
-            for (const char of accumulatedText) {
+            //FIXME: Send in larger chunks for better performance
+            let accumulatedChars = '';
+            for (let i = 0; i < accumulatedText.length; i++) {
+              accumulatedChars += accumulatedText[i];
               const chunkData = {
                 type: 'chunk',
-                content: char,
-                accumulated: accumulatedText.substring(0, accumulatedText.indexOf(char) + 1)
+                content: accumulatedText[i],
+                accumulated: accumulatedChars
               };
               
               controller.enqueue(encoder.encode(`data: ${JSON.stringify(chunkData)}\n\n`));
