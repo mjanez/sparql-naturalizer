@@ -71,3 +71,7 @@ Thumbs.db
 *.tmp
 *.temp
 .old
+
+# Ignore raw content files
+context/raw
+context/vector-store.json
